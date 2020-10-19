@@ -72,23 +72,31 @@ function humanReadableString(n) {
 
   // const digits = numDigits(n)
 
-  // 12345 => '54321'
+  // 10045 => '54001'
   const reversedNumberAsString = n.toString().split('').reverse().join('')
 
-  // '54321' => ['12', '345']
-  const chunks = reversedNumberAsString.match(/.{1,3}/g).map(
-    chunk => chunk.split('').reverse().join('')
-  ).reverse()
+  // '540, 01' => ['10', '45']
+  const chunks = reversedNumberAsString.match(/.{1,3}/g).map(chunk => {
+    const inOrder = chunk.split('').reverse().join('')
+    const zerosRemoved = Number.parseInt(inOrder).toString()
+    return zerosRemoved
+  }).reverse()
 
   chunks.forEach((chunk, i) => {
     const thKey = chunks.length - (i+1)
     const chunkLength = chunk.length
-    if (chunkLength === 3) {
-      str += getHundreds(chunk)
-    } else {
-      str += getDoubles(chunk)
+    if (chunkLength > 0 && chunk != '0') {
+      if (chunkLength === 3) {
+        str += getHundreds(chunk)
+      }
+      else {
+        str += getDoubles(chunk)
+      }
+
+      if (th[thKey]) {
+        str += ` ${th[thKey]} `
+      }
     }
-    str += th[thKey] ? ` ${th[thKey]} ` : ''
   })
 
   return str
