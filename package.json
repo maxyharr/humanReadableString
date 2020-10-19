@@ -2,7 +2,7 @@
   "name": "humanreadablestring",
   "version": "1.0.0",
   "description": "convert numbers to human readable strings like 1 => 'one' and 123,001 => 'one hundred twenty three thousand one'",
-  "main": "index.js",
+  "main": "humanReadableString.js",
   "scripts": {
     "test": "mocha"
   },

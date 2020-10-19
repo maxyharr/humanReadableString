@@ -40,7 +40,13 @@ const th = {
   2: 'million',
   3: 'billion',
   4: 'trillion',
-  5: 'quadrillion'
+  5: 'quadrillion',
+  6: 'quintillion',
+  7: 'sextillion',
+  8: 'septillion',
+  9: 'octillion',
+  10: 'nonillion',
+  11: 'decillion'
 }
 
 function getDoubles(numberString) {
@@ -70,22 +76,21 @@ function humanReadableString(n) {
     n = n * -1
   }
 
-  // const digits = numDigits(n)
-
-  // 10045 => '54001'
+  // 1000045 => '5400001'
   const reversedNumberAsString = n.toString().split('').reverse().join('')
 
-  // '540, 01' => ['10', '45']
+  // '5400001' => ['1', '', '45']
   const chunks = reversedNumberAsString.match(/.{1,3}/g).map(chunk => {
     const inOrder = chunk.split('').reverse().join('')
-    const zerosRemoved = Number.parseInt(inOrder).toString()
+    let zerosRemoved = Number.parseInt(inOrder).toString()
+    zerosRemoved = zerosRemoved == '0' ? '' : zerosRemoved
     return zerosRemoved
   }).reverse()
 
   chunks.forEach((chunk, i) => {
     const thKey = chunks.length - (i+1)
     const chunkLength = chunk.length
-    if (chunkLength > 0 && chunk != '0') {
+    if (chunkLength > 0) {
       if (chunkLength === 3) {
         str += getHundreds(chunk)
       }
