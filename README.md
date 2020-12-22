@@ -2,6 +2,6 @@
 
 ### A simple exercise to turn numbers into string representations
 
-`pnpm install`
+`npm install`
 
-`pnpm test`
+`npm test`
